@@ -1,0 +1,48 @@
+syntax = "proto3";
+package spider;
+
+option go_package = "./proto";
+import "github.com/metaverse/truss/deftree/googlethirdparty/annotations.proto";
+
+service SpiderServer {
+    rpc ParseList (ParseListRequest) returns (ParseListResponse) {
+        option (google.api.http) = {
+            post: "/list"
+        };
+    }
+    rpc ParseDetail (ParseDetailRequest) returns (ParseDetailResponse) {
+        option (google.api.http) = {
+            post: "/detail"
+        };
+    }
+}
+message ParseListResponseItem {
+    string url = 1;
+    ParseDetailResponse ext = 2;
+}
+message ParseListRequest {
+    string url = 1;
+}
+
+message ParseListResponse {
+    repeated ParseListResponseItem item = 1;
+}
+message ParseDetailRequest {
+    string url = 1;
+    string content = 2;
+}
+message ParseDetailResponse {
+    string company_name = 1;
+    string title = 2;
+    string city = 3;
+    string job_type = 4;
+    string site = 5;
+    string base_id = 6;
+    string description = 7;
+    string url = 8;
+    string job_category = 9;
+    string last_update_time = 10;
+    string job_create_time = 11;
+    string country = 12;
+    string location = 13;
+}
